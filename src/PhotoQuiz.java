@@ -1,0 +1,81 @@
+ // Copyright Wintriss Technical Schools 2013
+import java.awt.Component;
+import java.awt.Frame;
+import java.net.MalformedURLException;
+import java.net.URL;
+
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
+public class PhotoQuiz {
+
+	public static void main(String[] args) throws Exception {
+		Frame quizWindow = new Frame();
+		quizWindow.setVisible(true);
+
+		// 1. find an image on the internet, and put its URL in a String variable (from your browser, right click on the image, and select “Copy Image URL”)
+		String cat = "http://www.vetprofessionals.com/catprofessional/images/home-cat.jpg";
+		// 2. create a variable of type "Component" that will hold your image
+		Component cat2;
+		// 3. use the "createImage()" method below to initialize your Component
+			cat2 = createImage(cat);
+		// 4. add the image to the quiz window
+			quizWindow.add(cat2);
+		// 5. call the pack() method on the quiz window
+			quizWindow.pack();
+		// 6. ask a question that relates to the image
+			String x = JOptionPane.showInputDialog("What is the secret animal?");
+		// 7. print "CORRECT" if the user gave the right answer
+			if(x.equalsIgnoreCase("CAT")){
+				
+				JOptionPane.showMessageDialog(null, "Correct");
+			}
+		// 8. print "INCORRECT" if the answer is wrong
+			else{
+				
+				JOptionPane.showMessageDialog(null, "Wrong");
+			}
+
+		// 9. remove the component from the quiz window (you may not see the effect of this until step 12)
+			quizWindow.remove(cat2);
+		// 10. find another image and create it (might take more than one line of code)
+		String dog = "https://static.pexels.com/photos/7720/night-animal-dog-pet.jpg";
+			//	String dog = "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBxMTEhUTExIVFhUWGRgYGRgYFxgXGBoYGh0XFxgXFxcYHSggGBolHRcXITEiJSkrLi4uFx8zODMtNygtLisBCgoKDg0OGhAQGi0lICUtLTAtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLf/AABEIAOsA1wMBIgACEQEDEQH/xAAcAAEAAgMBAQEAAAAAAAAAAAAABQYDBAcCAQj/xAA8EAABAwIDBgMHAwMDBAMAAAABAAIRAwQFITEGEkFRYXEigZEHE6GxwdHwMkLhFGLxM3KiI1KCwhUWJP/EABkBAQADAQEAAAAAAAAAAAAAAAACAwQBBf/EACURAAICAgMAAgEFAQAAAAAAAAABAhEDIQQSMUFRMhMUIjNCI//aAAwDAQACEQMRAD8A7iiIgCIiAIiIAiIgCLy5wC8uqcQgMiLEyqHCQV4o3EndOunmuWKNhECLoCIiAIiIAiIgCIiAIiIAiIgCIiAIiIAiIgMdZ0BQNTGXBxYciOB0I6cj+QtnHMWp0h4j9VzvG8ca/wDTkQZBkyO3RZ8uVR+TRhxOXwXE7Ubkk5hphw4jkeo6qTG0VIs3w4EaxxXFrrFXOMk56SOI5FYre/M7occ+qzLltGp8OLR1q/2nouENdmtCz2hc067zVRqNIc/Qrcp04zDj5qt8qTZNcWCVHQaeLCd5p11HPqOqzXF+3f3wciAfRc+/+Sa392a1a2NuOQKs/da2V/td6OvYVeB7eo+ua31zfY/FYc01HbrTr6QPiujtM5hbMOTvGzHmx9JUfURFaVBERAEREAREQBERAEREAREQBERAFpYtcllMuEZDr9FuqC2vuN23fnqI9clDI6i2TgrkkcwxrFd9+85xJ/MgqrdXO86J8gt/EqwJdECOPFRNGGnIZn1PdeU7ez140tHx28M5jutzD97XdHdalZu84DL5+isWE20jQx5qNasl23R7o5CXELxd3uWREealK7BuwAB5KBrWjXmA7vnChRKzU/qN4wP49VP2FuwQTmo2hZ0qf6NeJknP/wAlKWbN4gSAfgpNIjbJLfaBA7rYtsWr0/8ATrOA5aj0KxMsTxX1tnEcV1SlHwg1GXpYMN2xqgxVaHjLMeE/yrDh20lCqQ0O3XnRrsp7HQql0sKJY550A+Kim8zmtMeRONdjPLjwnfU7Ci51YbW1qMNcBUZ1/UB/u4+at+D7QUbjJjod/wBrsj5c1shmhPwxzwzh6SyIitKgiIgCIiAIiIAiIgCIiAKle0qvFEDmf5V1XPPaxWhlMcyfkqc/4Muwf2I5fcgnIfzK1C0jKTPIfVyzm7y3QO54+q1apA4n0WHr9no9vo3MMoS4NaMzr/lXiwtA1sax81WdnaeUjIa9T1PJW11yKNFzzwBPnwAVctuh4rKttPiJbUFFmdQiSB+0cN48+ix0aUAc/wA5rDTqs3y9363mXH5BZHY/QpOG89o6mPgFGr8RZdes2WWD3cCB6ehU9g9lGZ/AtOy2opVWENqNLgJGnDqMluYbeCpmCjVHLsm92TCkrDDN7MrUwulvuH5krZb0wBC04MfbbMmbJ10iOxSiGUSAOipRt8yr3i4JYVVH04K5yVtHeNLTI19uvjLdozBIcNCMj6qSrDKVEvqLP4aVssmFbXOp+CvL28HZb3nzU+3ae3OjifKPmuU4nUga/BYcMvnaK6HLmtMqnxIPaO1UMSY7QrbBXL8PxF/UR5Kw4djrwQHPEf3fcLXDkp+mSfHa8LgiwWtwHtkEHsZWdaTMEREAREQBERAFz32uUppUj/eR6hdCVX9otqX2VSBJbDvJpk/CVXlVwZZhdTRxE0i3gtGo8l0R8VI3NSQtK1bLweS889JlrwChAz7n+Sse1F2XRSGQEE/QfnJSezdoaha0TLj8Fl2otWNdAAkanj+fmiRi2nIjKSTUSnXFsMgcsiSePZULFWtkkTPGeEkro9CqHVi05giBxVbx/Z1weS3Q8tI7KzBJReyvOnKOiEsKlBtOm6m6qLkPh4IHu3MO9m0jMEZa811nZmkAze6Bcsw/A3728dG9CuqbK2zntDc4y81LlNSqjnGTinZ0DZynInorAMlqYZabjITE7n3bepVsF0hszzfeeiPxy7jwg91XjVE5leby63nEzkoKvfw4g6czp/KwZJ95Wb8ePrGibuKsjJQjqon8hSdnU3sneGeYifNRuI2pY/Piq3fpbGvCJx53hBB7iRpzhY7SpAaVkx+yLqW8P1Nz/g9+qjcNedwI/LJL6LTSqiOI88kdVI4mOi02VRurC6uo2d6lowDHPdvEVe7XTB8xofJdKtLgPaHDjw5LglatukHgur7DYi2pRA4jt9F6HFyP8WYOXiSXZFqREW4wBERAEREAWK6pB7HNIkEEEdFlRAfmzE7Y0qtSkRmxxH2+Cx2lHUqze0e2i/qGP1Bpy7R65L1sjsrVuqg8JZRH6n8xybzJXndG5Uj0+662y4bC4a73DquhcNxnAnnB/bnlPCCq9tnZ+5dEjeOboAa0cmtA0A5mSSTK6syg2lTDWCAxsNHILmm1tBxcXO1M5zJ88hHYK/JBRx0ZYTcsllAbQcanh8v8q029j4RvkaT0WpaWoaS4kLfoUX1nCmz+B1Kx226NtUrMNGybUO61ocugbPYUKTQSAOQ5L5g+EMotGhdxP2UmagELVjxddv0yZc3bUfCQaYVZ2qr5Qp5lTJVPaupLiOmSlyH/AAZHjr+ZUr/Fm02mY5qgY5jtSrUY1rm0g5zQHuyABO7vE8AM5PCCrHi+GuLCSZ7Kl49TL3NPuyAGtZAEwWCJAHAqrBCPpfnlJG+zHrixuDRq1GVmtiXMdvtIcA4EO4iCF0Whfe+oB3I+cf4XI8Mw4EwQ6OxBJ4Bs/NdCw9r6DTTIJyBHQclHlRitolxpSfpLPrN924P0IVdwwDPiJI9O3FSdesPcuPGDqtGwtocYyBzj0kLH/k1/6Nr3mWeixVO/Y8+hWOs+JOccY1Hksf8AUjgQZ9D9iuUSs+VKuRa71Ung+KVGEBro6qu16284xwOf3C2bEkOEHVWbXhDTWztWzmNOcAHuDhzGo7jVWhplc32frO3WzTnkWkT91fcNr7zc/iIXqYZ2tnk5oVLRuIiK4pCIiAIiICOqYJQc4ufTa5x1LhJW/TphoAaAANAMgvSLiSXh1ts8vbKoHtIYG+73IBO9PlGfxXQVzn2kVZq0mtzMEeZIyVeb8GWYfzRUrO2qVnhjc+J5AcyV0DCMPbSaANeJ6rU2fw9tJoB1Obj1+3BSN7iVJggva0KrFjUdv0sy5XLS8N11QALywmJ4KGtMQp1XQx4MLcoVvFE5fBXFJMN0VU2uowQ/mIVnY/JQm1p/6QnmFVnVwZbgdTRV2UAaYlRVzhdB36tenwKl7WqYjTqorFaRJkTPHnz9FgUqPQcbZqU7GhSPhEuPqt+rTDW7ztStWzt90yY3uq84pXJEg6Lj2dWiExa5/YP3GPipt7d2eSrzKW9Vb/un4/wrXVYN3uI+f2XJRpJHYytsiLpufUeoUbUoweh0KlbrMzxjP6H85KJr1oMcvz0RIk2YKYznjxWwam76rHRaDnyM/T6pUf4ojVK2LOuez+5bVpwf1Nz8vqr5TZC5t7M2gPHYj5Lpq9Pju4HlchVNhERXlAREQBERAERfCgPhHNUnF5dclxjLws10GpjRXU/FUPFrsGo/uYUJkokFtttC62t3Obk5xDG9zJJ8gCuR1cXq1XSXuJ7q3e0lrqtFpB/03EuHQjVc0a9zXRw6LiR1suVnidxRAdDgOY0Vu2O2vBqBj3SHZHmDzXM7PGKjMiZHI6L7aVf+oHNy4rrRw/UtqWloiY5qD2sINOCc5EfVbOx9RzrSkXfqLB8lD7aOMMbxJJVOb8GW4F/0RB2p1BXiq1Y2U3QFr4le7jYnxFeco2em5Uaxf4j/AIWrfVfCeA1XltXmVAYniRqeFn6ePyhWxgVSmTGBQ+qSM2tGvUqYrVssuE+pUTs5Q3KWX7nD0EBSL6WRUMj2TxrRpXD/AK+RH4VF3lKc1J3FPksApyuJk2iPtxAKysp7zmr25kOKsmyuBOrPAjjmeQU/XohdLZcPZpYuBLyMt2B1P4F0NaeGWTaTA1oyAW4vSxQ6Ro8vLPvKwiIrCsIiIAiIgC+FfV8KAALnO1Nq6i55IMEkjkV0dYq9ux4h7Q4ciAR8VxqzqdH55xWqXBzSCWvyI7/b7Kk3WHBhgA9CdF+i9q9lqJaXUqbGnX9MCeeS5bimFvD92pQ8M5ObmB1IUPCXpzt9qDAzIJ/bqrfsdsfUfUaag3aUznk4jlu8z91v0cNcwy0Dnp5+Sv8AgFDwBxzPEE8eiWKLVbPa1gGgAgD5BQO0FMvqM5BufeVJG7gcB8/RQmKX0ndBl5/4jr9lTm3Gi3DqVmle0wwTOqp+KEiXEZ8Ar3Qow3xZwqZtRVkkNk/ADtzVKxqKtl/6jk6KFdXdWo+N4gch9SpG0oQCI7LW9yN6PUrYr3W64RyC63fh3z0sezVQuYf7XfQfYqTrfnooDZi6AqObOTj8c4VgeZELNlVM04XaNGsc16p01k90ZUvgeDVK7w1g7ngBzUEnJ0iyUlFWzSscJdXqNawST8BzPRdgwDB2W9MNAz4nmUwPAqdu2GjxcXHUqVXp4MHRW/Ty8+fu6XgREWgzBERAEREAREQBERAEREBoYxQ36Tm82kLh3/2OtTqGnIc0ZBrhvGBPHtkuw7b4qLe1cZhz/A3udfhK4bf0yXuIyBiT3gwqMsqZfijaZY7PGmOMGkyeMadhzU3bXzAAII7GfmqTYw3ipi1qkqKkdcSy/wBU3hP5n9Vitw0Ekc9VF+9Mr7UuCD80bOJEle1QBmR6wqjjN22CAPgPmYWTE790ctdfTVVK8rFzjnI6qqcrL4Ro1rp8HLU9svRajis1RsBa7mnXr/lEGbdjUIcCNQVesOuBVDQcnRrwPfqqLZhWPDHZiCq57LIWvC52OBvqPa3eEEjRdNwXCmW9MMaO54lcrwvEn0yHA6EGO2oXXbC7bVptqN0cAf4V/GUd/ZRyZSdX4bCIi1mQIiIAiIgCIiAIiIAiIgCIvFWoGtLiYABJ7DMoDkHtkxSbhlKfDSaCR/c/M/8AEN9VTri5L6UjX/P0WPbDE/f131T+9xPloB5ABaVpcS2OCxzduzZBUqM9hXI15/nzVhsaphQVhQ4nvHf+AFZbC1UkyLN5jVhuAQCVnLCCsNw7gUZxFbxUl7SdIUI2hAnmFa30/FB0Kibq3iABy/Pl6rPLTo0x2rIN1AwXHWPRa1Fm87topKrTc4HLIfFZbezgnpH0Xew6n21tuik7Vg14fJKNGPzRZms3XTzyPdQbJJEnQOWq6H7OcR3mVKJ/ad4djkfjn5rnFEwCOf58wpvYPEvd3dPe0qDcJ6nT4gKeGVTRDNHtBnX0RF6J5wREQBERAEREAREQBERAFXdvsQFGyqknN43G9SdfhKn6tQNBJ0C4t7SMbNxVhshjRAB+cKvJKkWY49mc8v6klZLFwDSV5rW8oyiQstmqibw528Ry4D81V1w9ghU/BKGnX8y6K62bcgFbFFUmbtS0BEqNvLOFPW683lvIldaIplHu/C5s6EwlegIB6j6Lax+hDD0cPRRtreAgsdx+YWXL6a8XhibaAt8j6r6ygN49isvvsj0M+XFeGk7x8wPUfnmqexf1MbDkfL6H6rw+oS4hZmWxIIWx/TeqdjvUxW5JI6ZFbFq+KzDyc0j1C8VG8j9V4tgd9s55qSIM76wyAei9LBYVg+mx40c1p9Qs69Y8gIiIAiIgCIiAIiIAiIgNLGHRSd2XEMeok1HHrxXZtoau7TJj5/RcgxOpLyeqy8h+GrjL0gP6WVjq0IKlAFjrsymFnTNLRvYNbGAeJ+X2Vrw6j81EYIyGyRmch2/IVkw+lktMfDJL03Lehksz6azU4hfXZqREq+01kDTceS5y1hktPPwn5Lp+0dYbm4NTE9lTbq3GWXNY80l2o24IvrbI21oGJPH7mVJUKK+0KfxzH1+q36VDkqKs0XRibTX2rTIGRW42jPH4L0bXzSiNkK+mY0X21PjGXFSVzQjUKNfkZUkw9nUvZ/e79t7snxUnOb1iZafjHkrOuRbO4s63uG1Bmx43XjnHTnxXWaFYPaHNMgiQV6WGalGvo8zPBxlf2ZERFcUhERAEREAREQBERAaGN0N+i8dDy+q45Uw8lxE8V26ufC7sVxi4zqOMxmVnzRTasvwyaTox08KI1X19iJCmbKsCIMFZa+7GhVf6S+Cz9VkfSq5ZeSnMNf4QSoCi2JAPr+clJWd4WZHMcFNEGWRpEZZrJwUZY3YcNNFvsuAuo4yLxCz3iVAXuHETyVsqVmla5YHawqZ4lLaL4ZXEp9K2IUhSaOynKmGtPJRt1h0aE9lQ8UkXLLFngAHUL37sclgpgjUEd5Ww0woEjTu2nlChqgU7dVcuHxUJWXGTieKroDc8wZC6RsPi4cPck6+Jv/s36+q5vXbLerVtYPiBYWuafEDPmPyFbjydJWV5MfeNHbUWphd82tSbUbo4acjxHqtteonZ5bVaCIiHAiIgCIiAIiID44SIXI8Tt3MuKjRoHFddXNtpm/8A63dYVeReFmP5NW3o9j8Cto0xoZWrTyIjitxqgSNSpZxKw06OalD+laI1HdRZNEnREBZm6rDanwhZG6juunD05mae7XtekFmNtPqvW6F8K0q1QzqjdBKz5fUgNMvP7LQAHQrNdPOi0yVkyemrH4fbjTJQ9YSVvVXFaNQSSqS5HlzMj2UbTrBr4PFTNHTyCgcSHjXWdTOg+zjHd2o63ecn5s6O4jzXSV+ecPrObUY4EghwIPUFfoYL0ONJuNfR5/KilK18hERaDMf/2Q==";
+		Component dog2;
+		dog2 = createImage(dog);
+			// 11. add the second image to the quiz window
+			quizWindow.add(dog2);
+		// 12. pack the quiz window
+			quizWindow.pack();
+		// 13. ask another question
+			String a = JOptionPane.showInputDialog("True or False. It is a dog.");
+		// 14+ check answer, say if correct or incorrect, etc.
+			if(a.equalsIgnoreCase("True")){
+				JOptionPane.showMessageDialog(null, "Correct");
+			}
+			else{
+				
+				JOptionPane.showMessageDialog(null, "Wrong");
+			}
+
+			
+	}
+
+	private static Component createImage(String imageUrl) throws MalformedURLException {
+		URL url = new URL(imageUrl);
+		Icon icon = new ImageIcon(url);
+		JLabel imageLabel = new JLabel(icon);
+		return imageLabel;
+	}
+
+	/* OPTIONAL */
+	// *14. add scoring to your quiz
+	// *15. make something happen when mouse enters image (imageComponent.addMouseMotionListener()) 
+}
+
+
+
+
