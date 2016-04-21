@@ -13,7 +13,6 @@ public class Spongebobrunner {
 		sq.getName();
 		sq.eat();
 		sq.laugh();
-		p.getName();
 
 	}
 }
