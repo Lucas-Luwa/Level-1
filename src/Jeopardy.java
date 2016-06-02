@@ -29,7 +29,7 @@ import java.io.File;
 public class Jeopardy implements ActionListener {
 	private JButton firstButton;
 	private JButton secondButton;
-	private JButton thirdButton, fourthButton;
+	private JButton thirdButton, fourthButton, fifthButton;
 	
 	private JPanel quizPanel;
 	int score = 0;
@@ -44,14 +44,14 @@ public class Jeopardy implements ActionListener {
 		JFrame frame = new JFrame();
 		quizPanel = new JPanel();
 		frame.setLayout(new BorderLayout());
-		
+	
 		// 1. Make the frame show up
 		frame.setVisible(true);
 		// 2. Give your frame a title
 		frame.setTitle("a");
 		// 3. Create a JPanel variable to hold the header using the createHeader method
 		JPanel Panel1;
-		Panel1 = createHeader("Science and Technology");
+		Panel1 = createHeader("Math");
 		// 4. Add the header component to the quizPanel
 		quizPanel.add(Panel1);
 		// 5. Add the quizPanel to the frame
@@ -62,14 +62,14 @@ public class Jeopardy implements ActionListener {
 	// 7. Add the firstButton to the quizPanel
 		quizPanel.add(firstButton);
 		// 8. Write the code inside the createButton() method below. Check that your game looks like Figure 1 in the Jeopardy Handout - http://bit.ly/1bvnvd4.
-		
+	//done
 		// 9. Use the secondButton variable to hold a button using the createButton method
-		
+		secondButton = createButton("400");
 		// 10. Add the secondButton to the quizPanel
-		
+		quizPanel.add(secondButton);
 		// 11. Add action listeners to the buttons (2 lines of code)
-	
-
+		secondButton.addActionListener(this);
+		firstButton.addActionListener(this);
 		// 12. Fill in the actionPerformed() method below
 				
 		frame.pack();
@@ -77,41 +77,81 @@ public class Jeopardy implements ActionListener {
 		frame.add(makeScorePanel(), BorderLayout.NORTH);
 		frame.setSize(Toolkit.getDefaultToolkit().getScreenSize().height, Toolkit.getDefaultToolkit().getScreenSize().width);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	}
+	
 
 	/*
 	 * 13. Use the method provided to play the Jeopardy theme music 
 	 * 
+	 
 	 * 14. Add buttons so that you have $200, $400, $600, $800 and $1000 questions
 	 *
 	 * [optional] Use the showImage or playSound methods when the user answers a question 
 	 */
 	
+	 playJeopardyTheme();
+	 thirdButton = createButton("600");
+	 quizPanel.add(thirdButton);
+	 fourthButton = createButton("800");
+	 quizPanel.add(fourthButton);
+	 thirdButton.addActionListener(this);
+	 fourthButton.addActionListener(this);
+	 fifthButton = createButton("1000");
+	 quizPanel.add(fifthButton);
+	 fifthButton.addActionListener(this);
+
+	}
 	private JButton createButton(String dollarAmount) {
 		// Create a new JButton
 		JButton Money = new JButton();
+		
 		// Set the text of the button to the dollarAmount
 		Money.setText(dollarAmount);
 		// Increment the buttonCount (this should make the layout vertical)
 		buttonCount +=1;
 		// Return your new button instead of the temporary button
 		
-		return new JButton("Money");
+		return(Money);
 	}
 
 	public void actionPerformed(ActionEvent arg0) {
-		// Remove this temporary message:
-		JOptionPane.showMessageDialog(null,"pressed " + ((JButton)arg0.getSource()).getText() + " button");
+	
+		
 
-		// Use the method that plays the jeopardy theme music.
+	
 
 		JButton buttonPressed = (JButton) arg0.getSource();
 		// If the buttonPressed was the firstButton
-		
+		if(buttonPressed.equals(firstButton )){
 			// Call the askQuestion() method
-			
+		askQuestion("What is 5x30?(doesn't need to be a question.)", "150", 200);
+		quizPanel.remove(firstButton);
+		firstButton.setText("");
+		}
 			// Fill in the askQuestion() method. When you play the game, the score should change.
-		
+		else if(buttonPressed.equals(secondButton)){
+			 
+			askQuestion("What is the 5th root of 32?", "2", 400);
+			quizPanel.remove(secondButton);
+			secondButton.setText("");
+		 }
+		else if(buttonPressed.equals(thirdButton)){
+			
+			askQuestion("What is 2^2","4", 600);
+			quizPanel.remove(thirdButton);
+			thirdButton.setText("");
+		}
+		else if(buttonPressed.equals(fourthButton)){
+			
+			askQuestion("What is the 3rd root of 216","6", 800);
+			quizPanel.remove(fourthButton);
+			fourthButton.setText("");
+		}
+		else if(buttonPressed.equals(fifthButton)){
+	
+			askQuestion("What is the 3rd root of 27","3", 1000);
+			quizPanel.remove(fifthButton);
+			fifthButton.setText("");
+		}
 		// Or if the buttonPressed was the secondButton
 
 
@@ -119,31 +159,37 @@ public class Jeopardy implements ActionListener {
 			
 		
 		// Clear the button text (set the button text to nothing)
-		
+	
 	}
 
 	private void askQuestion(String question, String correctAnswer, int prizeMoney) {
-		// Remove this temporary message
-		JOptionPane.showMessageDialog(null, "this is where the question will be asked");
-		// Use a pop up to ask the user the question
-	
+		String answer;
+			
+		 answer = JOptionPane.showInputDialog(question);
+		
+		
 		// If the answer is correct
+		if (answer.equals(correctAnswer)){
+			score	 += prizeMoney;	
 		
 			// Increase the score by the prizeMoney
 			
 			// Call the updateScore() method
-			
+			updateScore();
 			// Pop up a message to tell the user they were correct
-			
-		// Otherwise
+			JOptionPane.showMessageDialog(null, "Correct!");
+		}
+		else{
 		
+		score -= prizeMoney;
 			// Decrement the score by the prizeMoney
 			
 			// Pop up a message to tell the user the correct answer
-			
+			JOptionPane.showMessageDialog(null, "The correct answer is 4");
 			// Call the updateScore() method
+			updateScore();
 			
-		
+		}
 	}
 
 
