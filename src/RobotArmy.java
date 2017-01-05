@@ -4,10 +4,10 @@ public class RobotArmy {
 		// 1. create a new human
 		Human h = new Human("BOB");
 		// 2. create a new Robot army of good and evil robots.
-		Robot r = new Robot("AXE", true, 9);
-		Robot r2 = new Robot("TOMBSTONE", true, 7);
-		Robot r3 = new Robot("NICE", false, 1 );
-		Robot r4 = new Robot("KIND", false, 2);
+		Robot2 r = new Robot2("AXE", true, 9);
+		Robot2 r2 = new Robot2("TOMBSTONE", true, 7);
+		Robot2 r3 = new Robot2("NICE", false, 1 );
+		Robot2 r4 = new Robot2("KIND", false, 2);
 		
 		// 3. command your robot army to destroy a human
 		r.destroy(h);
@@ -44,13 +44,13 @@ class Human {
 /**
  * Robot Class
  */
-class Robot {
+class Robot2 {
 	boolean isEvil;
 	String name;
 	int power;
 	boolean Alive;
 
-	public Robot(String name, boolean isEvil, int power) {
+	public Robot2(String name, boolean isEvil, int power) {
 		this.name = name;
 		this.isEvil = isEvil;
 		this.Alive = true;
@@ -77,7 +77,7 @@ public int getPower() {
 public String getName(){
 	return name;
 }
-	public void botfight(Robot r){
+	public void botfight(Robot2 r){
 		if(power < r.getPower()){
 			System.out.println("The robots are fighting each other and " +name + " has destroyed " + r.getName());
 		}
