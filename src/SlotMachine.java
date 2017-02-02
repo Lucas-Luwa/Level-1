@@ -14,6 +14,7 @@ public class SlotMachine implements ActionListener {
 	int r3 = new Random().nextInt(9);
 	JLabel l4 = new JLabel();
 	JLabel l5 = new JLabel();
+	JButton b = new JButton();
 	public void create(int y) {
 
 		JFrame f = new JFrame();
@@ -30,7 +31,7 @@ public class SlotMachine implements ActionListener {
 		f.setSize(300, 300);
 		f.add(p);
 		f.setVisible(true);
-		JButton b = new JButton();
+		
 		b.setText("Play Again!");
 		p.add(b);
 		b.setVisible(true);
@@ -74,10 +75,14 @@ public class SlotMachine implements ActionListener {
 			l4.setText("You have " + y + ".");
 		}
 	}
+	
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
+		if(e.getSource().equals(b)){
 		
+			
+		}
 	}
 }
