@@ -3,6 +3,9 @@ package Calculator;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.JButton;
+import javax.swing.JLabel;
+
 public class Controller implements ActionListener {
 	Model m;
 	View v;
@@ -16,6 +19,13 @@ public class Controller implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
-		System.out.println("cat");
+		JButton b = (JButton) (e.getSource());
+		String text = b.getText();
+		System.out.println(text);
+		m.ADDADIGIT(text);
+		
+		if (e.getSource().equals(text)) {
+
+		}
 	}
 }
