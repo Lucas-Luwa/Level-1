@@ -9,6 +9,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class View {
+	Model m;
 	JButton b = new JButton();
 	JButton b2 = new JButton();
 	JButton b3 = new JButton();
@@ -30,6 +31,11 @@ public class View {
 	JLabel l2 = new JLabel();
 	JLabel l3 = new JLabel();
 	JLabel l4 = new JLabel();
+
+	public View(Model m) {
+		// TODO Auto-generated constructor stub
+		this.m = m;
+	}
 
 	public void Create() {
 		JFrame f = new JFrame();
@@ -75,7 +81,15 @@ public class View {
 		b16.setText("=");
 
 	}
-	public void addListener(ActionListener Controller){
+
+	public void update() {
+		l.setText(m.getFirstNumber());
+		l3.setText(m.getSecondNumber());
+		l2.setText(m.getOperator());
+		l4.setText(m.getAnswer()+"");
+	}
+
+	public void addListener(ActionListener Controller) {
 		b.addActionListener(Controller);
 		b2.addActionListener(Controller);
 		b3.addActionListener(Controller);

@@ -9,12 +9,14 @@ import javax.swing.JLabel;
 public class Controller implements ActionListener {
 	Model m;
 	View v;
+	
 
 	Controller(View v, Model m) {
 		this.v = v;
 		this.m = m;
 		v.addListener(this);
 	}
+	
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -23,9 +25,10 @@ public class Controller implements ActionListener {
 		String text = b.getText();
 		System.out.println(text);
 		m.ADDADIGIT(text);
+		v.update();
 		
 		if (e.getSource().equals(text)) {
-
+		
 		}
 	}
 }
