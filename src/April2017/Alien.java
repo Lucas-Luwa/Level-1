@@ -7,14 +7,12 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
-public class Projectile extends GameObject {
+public class Alien extends GameObject {
 	public static BufferedImage alienImg;
 	public static BufferedImage rocketImg;
 	public static BufferedImage bulletImg;
-	int speed = 10;
 
-	Projectile(int x, int y, int width, int height) {
-		
+	Alien(int x, int y, int width, int height) {
 		super();
 		this.x = x;
 		this.y = y;
@@ -29,18 +27,14 @@ public class Projectile extends GameObject {
 			e.printStackTrace();
 		}
 
-
 	}
 
 	void update() {
 		super.update();
-		y -= speed;
-		if (y < 0) {
-			isAlive = false;
-		}
+		y++;
 	}
 
 	void draw(Graphics g) {
-		g.drawImage(GamePanel.bulletImg, x, y, width, height, null);
+		g.drawImage(GamePanel.alienImg, x, y, width, height, null);	
 	}
 }

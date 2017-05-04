@@ -1,22 +1,26 @@
 package April2017;
 
 import java.awt.Graphics;
+import java.awt.Rectangle;
 
 public class GameObject {
 	int x;
 	int y;
 	int width;
 	int height;
+	boolean isAlive = true;
+	Rectangle collisionBox;
+
+	GameObject() {
+		 collisionBox = new Rectangle(x,y,width,height);
+	}
 
 	void update() {
-		for (int i = 0; i < 15; i++) {
-			x += 2;// Move for no reason!
-		}
+		collisionBox.setBounds(x, y, width, height);
 	}
 
 	void draw(Graphics g) {
-		g.fillRect(x, y, 100, 100);
+
 	}
 
-	
 }
