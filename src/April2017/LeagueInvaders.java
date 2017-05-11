@@ -5,10 +5,11 @@ import javax.swing.JFrame;
 
 public class LeagueInvaders {
 	JFrame f;
-	
+
 	GamePanel GP = new GamePanel();
 	public static final int WIDTH = 500;
 	public static final int HEIGHT = 800;
+
 	public static void main(String[] args) {
 		LeagueInvaders l = new LeagueInvaders();
 
@@ -17,7 +18,7 @@ public class LeagueInvaders {
 	public LeagueInvaders() {
 		f = new JFrame();
 		create();
-		
+
 	}
 
 	public void create() {
@@ -27,6 +28,6 @@ public class LeagueInvaders {
 		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		GP.startGame();
 		f.addKeyListener(GP);
-		
+
 	}
 }

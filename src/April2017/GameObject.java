@@ -12,7 +12,7 @@ public class GameObject {
 	Rectangle collisionBox;
 
 	GameObject() {
-		 collisionBox = new Rectangle(x,y,width,height);
+		collisionBox = new Rectangle(x, y, width, height);
 	}
 
 	void update() {

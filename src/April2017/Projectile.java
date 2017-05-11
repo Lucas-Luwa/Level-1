@@ -14,7 +14,7 @@ public class Projectile extends GameObject {
 	int speed = 10;
 
 	Projectile(int x, int y, int width, int height) {
-		
+
 		super();
 		this.x = x;
 		this.y = y;
@@ -28,7 +28,6 @@ public class Projectile extends GameObject {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
 
 	}
 

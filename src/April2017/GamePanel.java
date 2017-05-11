@@ -25,7 +25,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	Font titleFont = new Font("Arial", Font.PLAIN, 48);
 	Font titleFont2 = new Font("Arial", Font.PLAIN, 20);
 	Font titleFont3 = new Font("Arial", Font.PLAIN, 25);
-	
+
 	final int MENU_STATE = 0;
 	final int GAME_STATE = 1;
 	final int END_STATE = 2;
@@ -33,7 +33,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	Projectile j;
 	Rocketship r = new Rocketship(250, 700, 50, 50);
 	ObjectManager OM = new ObjectManager();
-	
+
 	void startGame() {
 		t.start();
 
@@ -68,10 +68,12 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	public void paintComponent(Graphics g) {
 		if (currentState == MENU_STATE) {
 			drawMenuState(g);
+			OM.setScore(0);
 		} else if (currentState == GAME_STATE) {
 			drawGameState(g);
 		} else if (currentState == END_STATE) {
 			drawEndState(g);
+
 		}
 	}
 
@@ -96,7 +98,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 			r.Down();
 		}
 		if (e.getKeyCode() == KeyEvent.VK_H && Rain) {
-			OM.addObject(new Projectile(r.x +00, r.y, 10, 10));
+			OM.addObject(new Projectile(r.x + 00, r.y, 10, 10));
 			OM.addObject(new Projectile(r.x - 50, r.y, 10, 10));
 			OM.addObject(new Projectile(r.x - 100, r.y, 10, 10));
 			OM.addObject(new Projectile(r.x - 150, r.y, 10, 10));
@@ -127,7 +129,6 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 
 		if (e.getKeyCode() == KeyEvent.VK_SPACE) {
 			OM.addObject(new Projectile(r.x + 20, r.y, 10, 10));
-			
 
 		}
 
@@ -175,20 +176,20 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		g.drawString("League Invaders", 50, 200);
 
 		g.drawString("Press ENTER to start.", 10, 270);
-		g.drawString("Press SPACE to start.", 10, 320);
+		g.drawString("Press SPACE to shoot.", 5, 320);
 		g.setFont(titleFont2);
 		g.drawString("Press the 'H' key to save yourself from trouble!", 30, 400);
 	}
 
 	void drawGameState(Graphics g) {
 		g.setColor(Color.BLACK);
-		
+
 		g.fillRect(0, 0, 500, 800);
 		g.setColor(Color.GREEN);
 		OM.draw(g);
 		g.setFont(titleFont3);
-		if(OM.win == false){
-		g.drawString("Congradulations! You Won!", 100, 400);
+		if (OM.win == false) {
+			g.drawString("Congradulations! You Won!", 100, 400);
 		}
 
 	}
@@ -199,8 +200,9 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		g.fillRect(0, 0, 500, 800);
 		g.setColor(Color.GREEN);
 		g.drawString("Game Over", 130, 300);
-		g.drawString("Your Score Is " + OM.getScore() + "!", 100, 400);
+		g.drawString("Your Score Is " + OM.getScore() + "!", 70, 400);
 		Rain = true;
+
 	}
 
 }
