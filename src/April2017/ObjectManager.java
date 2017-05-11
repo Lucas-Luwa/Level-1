@@ -64,6 +64,7 @@ public class ObjectManager {
 						System.out.println(score);
 						o1.isAlive = false;
 						o2.isAlive = false;
+						//score+=1;
 					}
 					else if((o1 instanceof Alien && o2 instanceof Rocketship) ||
 							(o2 instanceof Alien && o1 instanceof Rocketship)){

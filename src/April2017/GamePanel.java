@@ -168,7 +168,8 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		g.fillRect(0, 0, 500, 800);
 		g.setColor(Color.GREEN);
 		g.drawString("Game Over", 130, 300);
-		
+		g.drawString("Your Score Is " + OM.getScore() + "!", 100, 400);
+
 	}
 
 }
