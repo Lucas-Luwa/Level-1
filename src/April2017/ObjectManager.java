@@ -11,7 +11,7 @@ public class ObjectManager {
 	
 	long enemyTimer = 0;
 	int enemySpawnTime = 1000;
-	
+	boolean win = true;
 	public ObjectManager() {
 		objects = new ArrayList<GameObject>();
 	}
@@ -45,9 +45,40 @@ public class ObjectManager {
 	}
 
 	public void manageEnemies(){
-		if(System.currentTimeMillis() - enemyTimer >= enemySpawnTime){
+		if(System.currentTimeMillis() - enemyTimer >= enemySpawnTime && win){
 			addObject(new Alien(new Random().nextInt(LeagueInvaders.WIDTH), 0, 50, 50));
 			enemyTimer = System.currentTimeMillis();
+		if(score >= 5){
+			enemySpawnTime = 900;
+		}
+		if(score >= 100){
+			enemySpawnTime = 800;
+		}
+		if(score>=150){
+			enemySpawnTime = 700;
+		}
+		if(score>=200){
+			enemySpawnTime = 600;
+		}
+		if(score>=250){
+			enemySpawnTime = 500;
+		}
+		if(score>=300){
+			enemySpawnTime = 400;
+		}
+		if(score>=350){
+			enemySpawnTime = 300;
+		}
+		if(score>=400){
+			enemySpawnTime = 200;
+		}
+		if(score>=450){
+			enemySpawnTime = 100;
+		}
+		if(score>=500){
+		win = false;
+		}
+		
 		}
 	}
 
@@ -64,7 +95,7 @@ public class ObjectManager {
 						System.out.println(score);
 						o1.isAlive = false;
 						o2.isAlive = false;
-						//score+=1;
+						
 					}
 					else if((o1 instanceof Alien && o2 instanceof Rocketship) ||
 							(o2 instanceof Alien && o1 instanceof Rocketship)){

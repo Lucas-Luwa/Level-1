@@ -11,6 +11,7 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
+import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
@@ -18,22 +19,28 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	public static BufferedImage alienImg;
 	public static BufferedImage rocketImg;
 	public static BufferedImage bulletImg;
-
-	Timer t = new Timer(1000/60, this);
+	int l = 500;
+	boolean Rain = true;
+	Timer t = new Timer(1000 / 60, this);
 	Font titleFont = new Font("Arial", Font.PLAIN, 48);
+	Font titleFont2 = new Font("Arial", Font.PLAIN, 20);
+	Font titleFont3 = new Font("Arial", Font.PLAIN, 25);
+	
 	final int MENU_STATE = 0;
 	final int GAME_STATE = 1;
 	final int END_STATE = 2;
 	int currentState = MENU_STATE;
+	Projectile j;
 	Rocketship r = new Rocketship(250, 700, 50, 50);
 	ObjectManager OM = new ObjectManager();
+	
 	void startGame() {
 		t.start();
 
 	}
 
 	GamePanel() {
-		OM.addObject(r); 
+		OM.addObject(r);
 		try {
 			alienImg = ImageIO.read(this.getClass().getResourceAsStream("alien.png"));
 			rocketImg = ImageIO.read(this.getClass().getResourceAsStream("rocket.png"));
@@ -42,7 +49,6 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
 
 	}
 
@@ -72,7 +78,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	@Override
 	public void keyTyped(KeyEvent e) {
 		// TODO Auto-generated method stub
-	
+
 	}
 
 	@Override
@@ -87,27 +93,44 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 			}
 		}
 		if (e.getKeyCode() == KeyEvent.VK_UP) {
-
 			r.Down();
-
+		}
+		if (e.getKeyCode() == KeyEvent.VK_H && Rain) {
+			OM.addObject(new Projectile(r.x +00, r.y, 10, 10));
+			OM.addObject(new Projectile(r.x - 50, r.y, 10, 10));
+			OM.addObject(new Projectile(r.x - 100, r.y, 10, 10));
+			OM.addObject(new Projectile(r.x - 150, r.y, 10, 10));
+			OM.addObject(new Projectile(r.x - 200, r.y, 10, 10));
+			OM.addObject(new Projectile(r.x - 250, r.y, 10, 10));
+			OM.addObject(new Projectile(r.x - 300, r.y, 10, 10));
+			OM.addObject(new Projectile(r.x + 50, r.y, 10, 10));
+			OM.addObject(new Projectile(r.x + 100, r.y, 10, 10));
+			OM.addObject(new Projectile(r.x + 150, r.y, 10, 10));
+			OM.addObject(new Projectile(r.x + 200, r.y, 10, 10));
+			OM.addObject(new Projectile(r.x + 250, r.y, 10, 10));
+			OM.addObject(new Projectile(r.x + 300, r.y, 10, 10));
+			OM.addObject(new Projectile(r.x + 350, r.y, 10, 10));
+			Rain = false;
 		}
 		if (e.getKeyCode() == KeyEvent.VK_DOWN) {
 			r.Up();
 
 		}
 		if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-
+			r.left = true;
 			r.Right();
 		}
 		if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
 			r.left();
-		} 
-		
-		if(e.getKeyCode() == KeyEvent.VK_SPACE){
-			OM.addObject(new Projectile(r.x+20, r.y, 10, 10));
+			r.right = true;
+		}
+
+		if (e.getKeyCode() == KeyEvent.VK_SPACE) {
+			OM.addObject(new Projectile(r.x + 20, r.y, 10, 10));
+			
 
 		}
-		
+
 		else {
 
 		}
@@ -116,7 +139,8 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	@Override
 	public void keyReleased(KeyEvent e) {
 		// TODO Auto-generated method stub
-		
+		r.left = false;
+		r.right = false;
 	}
 
 	void updateMenuState() {
@@ -127,15 +151,14 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		OM.update();
 		OM.manageEnemies();
 		OM.checkCollision();
-		if(r.isAlive == false){
+		if (r.isAlive == false) {
 			currentState = END_STATE;
 			OM.reset();
 			r = new Rocketship(250, 700, 50, 50);
 			OM.addObject(r);
-			
-		}
-		else{
-			
+
+		} else {
+
 		}
 		OM.update();
 	}
@@ -153,12 +176,20 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 
 		g.drawString("Press ENTER to start.", 10, 270);
 		g.drawString("Press SPACE to start.", 10, 320);
+		g.setFont(titleFont2);
+		g.drawString("Press the 'H' key to save yourself from trouble!", 30, 400);
 	}
 
 	void drawGameState(Graphics g) {
 		g.setColor(Color.BLACK);
+		
 		g.fillRect(0, 0, 500, 800);
+		g.setColor(Color.GREEN);
 		OM.draw(g);
+		g.setFont(titleFont3);
+		if(OM.win == false){
+		g.drawString("Congradulations! You Won!", 100, 400);
+		}
 
 	}
 
@@ -169,7 +200,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		g.setColor(Color.GREEN);
 		g.drawString("Game Over", 130, 300);
 		g.drawString("Your Score Is " + OM.getScore() + "!", 100, 400);
-
+		Rain = true;
 	}
 
 }

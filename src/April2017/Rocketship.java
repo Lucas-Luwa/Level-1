@@ -5,6 +5,8 @@ import java.awt.Graphics;
 
 public class Rocketship extends GameObject {
 	int speed;
+	boolean left = false;
+	boolean right = false;
 
 	Rocketship(int x, int y, int width, int height) {
 		super();
@@ -12,16 +14,22 @@ public class Rocketship extends GameObject {
 		this.y = y;
 		this.width = width;
 		this.height = height;
-		speed = 5;
+		speed = 3;
 	}
 
 	void update() {
 		super.update();
+		if (left) {
+			x -= speed;
+		}
+		if (right) {
+			x += speed;
+		}
 	}
 
 	void draw(Graphics g) {
-		//g.setColor(Color.BLUE);
-		//g.fillRect(x, y, width, height);
+		// g.setColor(Color.BLUE);
+		// g.fillRect(x, y, width, height);
 		g.drawImage(GamePanel.rocketImg, x, y, width, height, null);
 
 	}
