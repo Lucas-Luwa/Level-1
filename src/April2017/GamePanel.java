@@ -104,6 +104,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 			}
 		}
 		if (e.getKeyCode() == KeyEvent.VK_UP) {
+			r.up = true;
 			r.Down();
 		}
 		if (e.getKeyCode() == KeyEvent.VK_H && Rain) {
@@ -136,6 +137,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 			s.play();
 		}
 		if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+			r.down = true;
 			r.Up();
 
 		}
@@ -163,6 +165,8 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		// TODO Auto-generated method stub
 		r.left = false;
 		r.right = false;
+		r.up = false;
+		r.down = false;
 	}
 
 	void updateMenuState() {

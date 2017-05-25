@@ -7,6 +7,8 @@ public class Rocketship extends GameObject {
 	int speed;
 	boolean left = false;
 	boolean right = false;
+	boolean up = false;
+	boolean down = false;
 
 	Rocketship(int x, int y, int width, int height) {
 		super();
@@ -25,10 +27,16 @@ public class Rocketship extends GameObject {
 		if (right) {
 			x += speed;
 		}
+		if (up) {
+			y -= speed;
+		}
+		if (down) {
+			y += speed;
+		}
 		if (x >= 450) {
 			x = 450;
 		} else if (x <= 0) {
-			x = 0;
+			x = 0; 
 		} else if (y >= 730) {
 			y = 730;
 		} else if (y <= 0) {

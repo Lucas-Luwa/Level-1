@@ -49,34 +49,34 @@ public class ObjectManager {
 		if (System.currentTimeMillis() - enemyTimer >= enemySpawnTime && win) {
 			addObject(new Alien(new Random().nextInt(LeagueInvaders.WIDTH), 0, 50, 50));
 			enemyTimer = System.currentTimeMillis();
-			if (score >= 50) {
+			if (score >= 5) {
 				enemySpawnTime = 900;
 			}
-			if (score >= 100) {
+			if (score >= 10) {
 				enemySpawnTime = 800;
 			}
-			if (score >= 150) {
+			if (score >= 15) {
 				enemySpawnTime = 700;
 			}
-			if (score >= 200) {
+			if (score >= 20) {
 				enemySpawnTime = 600;
 			}
-			if (score >= 250) {
+			if (score >= 25) {
 				enemySpawnTime = 500;
 			}
-			if (score >= 300) {
+			if (score >= 30) {
 				enemySpawnTime = 400;
 			}
-			if (score >= 350) {
+			if (score >= 35) {
 				enemySpawnTime = 300;
 			}
-			if (score >= 400) {
+			if (score >= 40) {
 				enemySpawnTime = 200;
 			}
-			if (score >= 450) {
+			if (score >= 45) {
 				enemySpawnTime = 100;
 			}
-			if (score >= 500) {
+			if (score >= 100) {
 				win = false;
 			}
 
