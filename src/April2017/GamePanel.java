@@ -8,12 +8,21 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
 
 import javax.imageio.ImageIO;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.Timer;
+
+import javazoom.jl.player.advanced.AdvancedPlayer;
 
 public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	public static BufferedImage alienImg;
@@ -32,6 +41,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	int currentState = MENU_STATE;
 	Projectile j;
 	Rocketship r = new Rocketship(250, 700, 50, 50);
+	Song s = new Song("LAZE.mp3");
 	ObjectManager OM = new ObjectManager();
 
 	void startGame() {
@@ -87,7 +97,6 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	public void keyPressed(KeyEvent e) {
 		// TODO Auto-generated method stub
 		if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-			System.out.println("fdg");
 			if (currentState > END_STATE) {
 				currentState = MENU_STATE;
 			} else {
@@ -113,6 +122,18 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 			OM.addObject(new Projectile(r.x + 300, r.y, 10, 10));
 			OM.addObject(new Projectile(r.x + 350, r.y, 10, 10));
 			Rain = false;
+			s.play();
+			s.play();
+			s.play();
+			s.play();
+			s.play();
+			s.play();
+			s.play();
+			s.play();
+			s.play();
+			s.play();
+			s.play();
+			s.play();
 		}
 		if (e.getKeyCode() == KeyEvent.VK_DOWN) {
 			r.Up();
@@ -129,7 +150,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 
 		if (e.getKeyCode() == KeyEvent.VK_SPACE) {
 			OM.addObject(new Projectile(r.x + 20, r.y, 10, 10));
-
+			s.play();
 		}
 
 		else {
@@ -174,7 +195,6 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		g.setFont(titleFont);
 		g.setColor(Color.GREEN);
 		g.drawString("League Invaders", 50, 200);
-
 		g.drawString("Press ENTER to start.", 10, 270);
 		g.drawString("Press SPACE to shoot.", 5, 320);
 		g.setFont(titleFont2);
@@ -183,7 +203,6 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 
 	void drawGameState(Graphics g) {
 		g.setColor(Color.BLACK);
-
 		g.fillRect(0, 0, 500, 800);
 		g.setColor(Color.GREEN);
 		OM.draw(g);
@@ -203,6 +222,92 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		g.drawString("Your Score Is " + OM.getScore() + "!", 70, 400);
 		Rain = true;
 
+	}
+
+	class Song {
+
+		private int duration;
+		private String songAddress;
+		private AdvancedPlayer mp3Player;
+		private InputStream songStream;
+
+		/**
+		 * Songs can be constructed from files on your computer or Internet
+		 * addresses.
+		 * 
+		 * Examples: <code> 
+		 * 		new Song("everywhere.mp3"); 	//from default package 
+		 * 		new Song("/Users/joonspoon/music/Vampire Weekend - Modern Vampires of the City/03 Step.mp3"); 
+		 * 		new	Song("http://freedownloads.last.fm/download/569264057/Get%2BGot.mp3"); 
+		 * </code>
+		 */
+		public Song(String songAddress) {
+			this.songAddress = songAddress;
+		}
+
+		public void play() {
+			loadFile();
+			if (songStream != null) {
+				loadPlayer();
+				startSong();
+			} else
+				System.err.println("Unable to load file: " + songAddress);
+		}
+
+		public void setDuration(int seconds) {
+			this.duration = seconds * 100;
+		}
+
+		public void stop() {
+			if (mp3Player != null)
+				mp3Player.close();
+		}
+
+		private void startSong() {
+			Thread t = new Thread() {
+				public void run() {
+					try {
+						if (duration > 0)
+							mp3Player.play(duration);
+						else
+							mp3Player.play();
+					} catch (Exception e) {
+					}
+				}
+			};
+			t.start();
+		}
+
+		private void loadPlayer() {
+			try {
+				this.mp3Player = new AdvancedPlayer(songStream);
+			} catch (Exception e) {
+			}
+		}
+
+		private void loadFile() {
+			if (songAddress.contains("http"))
+				this.songStream = loadStreamFromInternet();
+			else
+				this.songStream = loadStreamFromComputer();
+		}
+
+		private InputStream loadStreamFromInternet() {
+			try {
+				return new URL(songAddress).openStream();
+			} catch (Exception e) {
+				return null;
+			}
+		}
+
+		private InputStream loadStreamFromComputer() {
+			try {
+				return new FileInputStream(songAddress);
+			} catch (FileNotFoundException e) {
+
+				return this.getClass().getResourceAsStream(songAddress);
+			}
+		}
 	}
 
 }

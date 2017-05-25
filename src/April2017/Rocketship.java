@@ -25,11 +25,18 @@ public class Rocketship extends GameObject {
 		if (right) {
 			x += speed;
 		}
+		if (x >= 450) {
+			x = 450;
+		} else if (x <= 0) {
+			x = 0;
+		} else if (y >= 730) {
+			y = 730;
+		} else if (y <= 0) {
+			y = 0;
+		}
 	}
 
 	void draw(Graphics g) {
-		// g.setColor(Color.BLUE);
-		// g.fillRect(x, y, width, height);
 		g.drawImage(GamePanel.rocketImg, x, y, width, height, null);
 
 	}
